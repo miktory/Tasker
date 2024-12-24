@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Tasker.Identity.Data;
 using Tasker.Identity.Models;
 using Microsoft.Extensions.FileProviders;
+using System;
 
 namespace Tasker.Identity
 {
@@ -61,9 +62,9 @@ namespace Tasker.Identity
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+			}
 
-            app.UseStaticFiles(new StaticFileOptions
+			app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(env.ContentRootPath, "Styles")),
