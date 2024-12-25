@@ -6,7 +6,6 @@ namespace Tasker.Identity.Data
     {
         public static void Initialize(AuthDbContext context)
         {
-            context.Database.EnsureCreated();
 		    context.Database.Migrate();
 		}
     }

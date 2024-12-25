@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace Tasker.Persistence
     {
         public static void Initialize(ParametrizedTasksDbContext context)
         {
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
+          
         }
     }
 }

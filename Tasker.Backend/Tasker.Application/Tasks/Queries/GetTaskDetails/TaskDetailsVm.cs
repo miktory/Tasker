@@ -20,8 +20,9 @@ namespace Tasker.Application.Tasks.Queries.GetTaskDetails
         public DateTime? EndDate { get; set; }
         public int TTL { get; set; }
         public string Status { get; set; }
+		public string? WorkerName { get; set; }
 
-        public void Mapping(Profile profile)
+		public void Mapping(Profile profile)
         {
             profile.CreateMap<ParametrizedTask, TaskDetailsVm>()
                 .ForMember(taskVm => taskVm.Type, opt => opt.MapFrom(parametrizedTask => parametrizedTask.Type))
@@ -31,8 +32,9 @@ namespace Tasker.Application.Tasks.Queries.GetTaskDetails
                 .ForMember(taskVm => taskVm.StartDate, opt => opt.MapFrom(parametrizedTask => parametrizedTask.StartDate))
                 .ForMember(taskVm => taskVm.EndDate, opt => opt.MapFrom(parametrizedTask => parametrizedTask.EndDate))
                 .ForMember(taskVm => taskVm.TTL, opt => opt.MapFrom(parametrizedTask => parametrizedTask.TTL))
-                .ForMember(taskVm => taskVm.Status, opt => opt.MapFrom(parametrizedTask => parametrizedTask.Status));
-        }
+                .ForMember(taskVm => taskVm.Status, opt => opt.MapFrom(parametrizedTask => parametrizedTask.Status))
+                .ForMember(taskVm => taskVm.WorkerName, opt => opt.MapFrom(parametrizedTask => parametrizedTask.WorkerName));
+		}
 
     }
 }
