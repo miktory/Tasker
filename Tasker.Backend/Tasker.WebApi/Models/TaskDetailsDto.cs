@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Tasker.Application.Common.Mappings;
 using Tasker.Domain;
 
-namespace Tasker.Messaging.Kafka.Models
+namespace Tasker.WebApi.Models
 {
-    public class TaskDetailsVmKafka: IMapWith<ParametrizedTask>
+    public class TaskDetailsDto: IMapWith<ParametrizedTask>
     {
         public Guid Id { get; set; }
         public string Type { get; set; }
@@ -19,7 +19,7 @@ namespace Tasker.Messaging.Kafka.Models
 
 		public void Mapping(Profile profile)
         {
-            profile.CreateMap<ParametrizedTask, TaskDetailsVmKafka>()
+            profile.CreateMap<ParametrizedTask, TaskDetailsDto>()
                 .ForMember(taskVm => taskVm.Type, opt => opt.MapFrom(parametrizedTask => parametrizedTask.Type))
                 .ForMember(taskVm => taskVm.Parameters, opt => opt.MapFrom(parametrizedTask => parametrizedTask.Parameters))
                 .ForMember(taskVm => taskVm.Id, opt => opt.MapFrom(parametrizedTask => parametrizedTask.Id))

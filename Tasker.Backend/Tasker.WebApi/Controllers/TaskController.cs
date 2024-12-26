@@ -10,6 +10,7 @@ using Tasker.Application.Tasks.Commands.CreateTask;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
 using Tasker.Messaging.Kafka;
+using Tasker.Messaging.Kafka.Commands.SendMessageToKafka;
 
 namespace Tasker.WebApi.Controllers
 {
@@ -55,15 +56,10 @@ namespace Tasker.WebApi.Controllers
             var command = _mapper.Map<CreateTaskCommand>(createTaskDto);
             command.UserId = UserId;
             var taskId = await Mediator.Send(command);
-            try
-            {
-                await _kafkaProducer.ProduceAsync(taskId, CancellationToken.None);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return Ok(taskId);
+            var kafkaCommand = _mapper.Map<SendMessageToKafkaCommand>(createTaskDto);
+            //kafkaCommand.Id = taskId;
+            await Mediator.Send(kafkaCommand);
+            return Ok(taskId);  
         }
   }
 }
