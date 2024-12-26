@@ -36,6 +36,7 @@ namespace Notes.WebApi
             });
 
 			services.AddProducer<TaskDetailsVmKafka>(Configuration.GetSection("Kafka:Task"));
+            services.AddScoped(typeof(IKafkaProducer<>), typeof(KafkaProducer<>));
             services.AddApplication();
             services.AddPersistence(Configuration);
             services.AddControllers();

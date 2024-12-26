@@ -9,6 +9,7 @@ using AutoMapper;
 using Tasker.Application.Tasks.Commands.CreateTask;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
+using Tasker.Messaging.Kafka;
 
 namespace Tasker.WebApi.Controllers
 {
@@ -18,7 +19,12 @@ namespace Tasker.WebApi.Controllers
     public class TaskController : BaseController
     {
         private readonly IMapper _mapper;
-        public TaskController(IMapper mapper) => _mapper = mapper;
+        private readonly IKafkaProducer<Guid> _kafkaProducer;
+        public TaskController(IMapper mapper, IKafkaProducer<Guid> kafkaProducer)
+        {
+            _mapper = mapper;
+            _kafkaProducer = kafkaProducer;
+        }
 
         [HttpGet]
         public async Task<ActionResult<TaskListVm>> GetAll()
@@ -49,7 +55,15 @@ namespace Tasker.WebApi.Controllers
             var command = _mapper.Map<CreateTaskCommand>(createTaskDto);
             command.UserId = UserId;
             var taskId = await Mediator.Send(command);
+            try
+            {
+                await _kafkaProducer.ProduceAsync(taskId, CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
             return Ok(taskId);
         }
-    }
+  }
 }
