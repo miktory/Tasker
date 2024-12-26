@@ -15,6 +15,9 @@ using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Tasker.WebApi;
+using Tasker.Messaging.Kafka;
+using Tasker.Messaging.Kafka.Models;
+
 
 namespace Notes.WebApi
 {
@@ -32,6 +35,7 @@ namespace Notes.WebApi
                 config.AddProfile(new AssemblyMappingProfile(typeof(IParametrizedTasksDbContext).Assembly));
             });
 
+			services.AddProducer<TaskDetailsVmKafka>(Configuration.GetSection("Kafka:Task"));
             services.AddApplication();
             services.AddPersistence(Configuration);
             services.AddControllers();

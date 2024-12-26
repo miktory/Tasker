@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Messaging.Kafka\Tasker.Messaging.Kafka.csproj" />
     <ProjectReference Include="..\Tasker.Application\Tasker.Application.csproj" />
     <ProjectReference Include="..\Tasker.Persistence\Tasker.Persistence.csproj" />
   </ItemGroup>

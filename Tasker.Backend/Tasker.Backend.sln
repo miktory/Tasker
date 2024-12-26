@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasker.WebApi", "Tasker.Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasker.Persistence", "Tasker.Persistence\Tasker.Persistence.csproj", "{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasker.Messaging.Kafka", "Messaging.Kafka\Tasker.Messaging.Kafka.csproj", "{44289BBA-C73E-4397-8B21-70CF81DE778A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44289BBA-C73E-4397-8B21-70CF81DE778A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44289BBA-C73E-4397-8B21-70CF81DE778A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44289BBA-C73E-4397-8B21-70CF81DE778A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44289BBA-C73E-4397-8B21-70CF81DE778A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{5D21BEE2-2A15-421B-B3DA-E880C55BCDEB} = {4D067DBE-7F58-46E1-9A26-084517BC5B98}
 		{80708381-B38F-40AC-9C81-C61D1532FD4B} = {F45085EA-7CA6-4A0B-AE87-EDF5A082BB26}
 		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2} = {9FF3DD3A-3FC2-4B44-AD7B-0304AE902727}
+		{44289BBA-C73E-4397-8B21-70CF81DE778A} = {9FF3DD3A-3FC2-4B44-AD7B-0304AE902727}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A43ADEC-7A0E-4389-A5F7-BFDFC8FF6120}
