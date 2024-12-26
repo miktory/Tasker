@@ -43,6 +43,15 @@ namespace Tasker.WebApi.Middleware
                 case NotFoundException notFoundException:
                     code = HttpStatusCode.NotFound;
                     break;
+
+                case TimeoutException:
+                    code =HttpStatusCode.GatewayTimeout;
+                    break;
+
+                default:
+                    code = HttpStatusCode.InternalServerError;
+                    result = JsonSerializer.Serialize(new { error = "An error occured." });
+					break;
             }
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;

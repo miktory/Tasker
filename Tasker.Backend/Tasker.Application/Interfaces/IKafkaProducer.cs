@@ -1,4 +1,4 @@
-﻿namespace Tasker.Messaging.Kafka
+﻿namespace Tasker.Application.Interfaces
 {
 	public interface IKafkaProducer<in TMessage> : IDisposable
 	{

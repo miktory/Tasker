@@ -5,17 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 
-namespace Tasker.Messaging.Kafka.Commands.SendMessageToKafka
+namespace Tasker.Application.Tasks.Commands.SendTaskToKafka
 {
-    public class SendMessageToKafkaCommandValidator : AbstractValidator<SendMessageToKafkaCommand>
+    public class SendTaskToKafkaCommandValidator : AbstractValidator<SendTaskToKafkaCommand>
     {
-        public SendMessageToKafkaCommandValidator() 
+        public SendTaskToKafkaCommandValidator() 
         {
             RuleFor(createTaskCommand => createTaskCommand.TTL).GreaterThanOrEqualTo(0);
             RuleFor(createTaskCommand => createTaskCommand.Id).NotEqual(Guid.Empty);
             RuleFor(createTaskCommand => createTaskCommand.Type).NotEmpty().MaximumLength(100);
             RuleFor(createTaskCommand => createTaskCommand.Parameters.ToString()).MaximumLength(100);
-
-        }
+		}
     }
 }

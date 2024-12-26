@@ -9,8 +9,7 @@ using AutoMapper;
 using Tasker.Application.Tasks.Commands.CreateTask;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
-using Tasker.Messaging.Kafka;
-using Tasker.Messaging.Kafka.Commands.SendMessageToKafka;
+using Tasker.Application.Tasks.Commands.SendTaskToKafka;
 
 namespace Tasker.WebApi.Controllers
 {
@@ -20,11 +19,9 @@ namespace Tasker.WebApi.Controllers
     public class TaskController : BaseController
     {
         private readonly IMapper _mapper;
-        private readonly IKafkaProducer<Guid> _kafkaProducer;
-        public TaskController(IMapper mapper, IKafkaProducer<Guid> kafkaProducer)
+        public TaskController(IMapper mapper)
         {
             _mapper = mapper;
-            _kafkaProducer = kafkaProducer;
         }
 
         [HttpGet]
@@ -53,13 +50,26 @@ namespace Tasker.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateTaskDto createTaskDto)
         {
-            var command = _mapper.Map<CreateTaskCommand>(createTaskDto);
+	
+			var command = _mapper.Map<CreateTaskCommand>(createTaskDto);
             command.UserId = UserId;
-            var taskId = await Mediator.Send(command);
-            var kafkaCommand = _mapper.Map<SendMessageToKafkaCommand>(createTaskDto);
-            //kafkaCommand.Id = taskId;
-            await Mediator.Send(kafkaCommand);
-            return Ok(taskId);  
+            var taskId = Guid.Empty;
+
+			using (var cancellationTokenSource = new CancellationTokenSource(30000)) // отмена операции через 30 секунд
+			{
+				taskId = await Mediator.Send(command, cancellationTokenSource.Token);
+			}
+
+
+			var kafkaCommand = _mapper.Map<SendTaskToKafkaCommand>(createTaskDto);
+			kafkaCommand.Id = taskId;
+
+			using (var cancellationTokenSource = new CancellationTokenSource(30000)) // отмена операции через 30 секунд
+			{
+				await Mediator.Send(kafkaCommand, cancellationTokenSource.Token);
+			}
+
+			return Ok(taskId);  
         }
   }
 }
