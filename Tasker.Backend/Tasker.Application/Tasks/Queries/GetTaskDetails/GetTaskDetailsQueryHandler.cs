@@ -10,15 +10,16 @@ using System.Threading.Tasks;
 using Tasker.Application.Interfaces;
 using Tasker.Application.Common.Exceptions;
 using Tasker.Domain;
+using Tasker.Shared.Vm;
 
 namespace Tasker.Application.Tasks.Queries.GetTaskDetails
 {
     public class GetTaskDetailsQueryHandler : IRequestHandler<GetTaskDetailsQuery, TaskDetailsVm>
     {
-        private readonly IParametrizedTasksDbContext _dbContext;
+        private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetTaskDetailsQueryHandler(IParametrizedTasksDbContext dbContext, IMapper mapper)
+        public GetTaskDetailsQueryHandler(IApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

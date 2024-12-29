@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tasker.Application.Interfaces
 {
-    public interface IParametrizedTasksDbContext
+    public interface IApplicationDbContext
     {
         DbSet<ParametrizedTask> ParametrizedTasks { get; set; }
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+		DbSet<ParametrizedTaskResult> ParametrizedTasksResults { get; set; }
+		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
     }
 }

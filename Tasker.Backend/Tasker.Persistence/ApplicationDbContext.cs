@@ -7,12 +7,14 @@ using Notes.Persistence.EntityTypeConfigurations;
 
 namespace Tasker.Persistence
 {
-	public class ParametrizedTasksDbContext : DbContext,  IParametrizedTasksDbContext
+	public class ApplicationDbContext : DbContext,  IApplicationDbContext
 	{
-		public ParametrizedTasksDbContext(DbContextOptions options) : base(options) { }
+		public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<ParametrizedTask> ParametrizedTasks { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		public DbSet<ParametrizedTaskResult> ParametrizedTasksResults { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ParametrizedTaskConfiguration());
             base.OnModelCreating(modelBuilder);

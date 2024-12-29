@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using Tasker.Application.Common.Behaviors;
+using Tasker.Application.Interfaces;
+using Tasker.Application.Services;
 
 
 namespace Tasker.Application
@@ -20,7 +22,8 @@ namespace Tasker.Application
             services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() }); 
             services.AddTransient(typeof(IPipelineBehavior<,>),
                 typeof(ValidationBehavior<,>));
-            return services;
+			services.AddHostedService<TaskToBrokerSenderService>();
+			return services;
         }
     }
 }

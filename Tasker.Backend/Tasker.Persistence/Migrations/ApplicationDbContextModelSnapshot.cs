@@ -11,8 +11,8 @@ using Tasker.Persistence;
 
 namespace Tasker.Persistence.Migrations
 {
-    [DbContext(typeof(ParametrizedTasksDbContext))]
-    partial class ParametrizedTasksDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,25 @@ namespace Tasker.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("ParametrizedTasks");
+                });
+
+            modelBuilder.Entity("Tasker.Domain.ParametrizedTaskResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("ParametrizedTaskId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Result")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ParametrizedTasksResults");
                 });
 #pragma warning restore 612, 618
         }

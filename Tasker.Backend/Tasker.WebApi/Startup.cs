@@ -16,7 +16,8 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Tasker.WebApi;
 using Tasker.Messaging.Kafka;
-using Tasker.WebApi.Models;
+using Tasker.Application.Tasks.Messages.TaskInfoUpdated;
+using Tasker.Shared.Dto;
 
 
 namespace Notes.WebApi
@@ -32,14 +33,16 @@ namespace Notes.WebApi
             services.AddAutoMapper(config =>
             {
                 config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
-                config.AddProfile(new AssemblyMappingProfile(typeof(IParametrizedTasksDbContext).Assembly));
-
-              config.AddProfile(new AssemblyMappingProfile(typeof(IParametrizedTasksDbContext).Assembly));
+                config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationDbContext).Assembly));
+                config.AddMaps(Assembly.GetExecutingAssembly());
             });
 
-			services.AddProducer<TaskDetailsDto>(Configuration.GetSection("Kafka:Task"));
-            services.AddScoped(typeof(IKafkaProducer<>), typeof(KafkaProducer<>));
-            services.AddApplication();
+            //	services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+			services.AddConsumer<TaskInfoUpdatedMessage, TaskInfoUpdatedMessageHandler>(Configuration.GetSection("Kafka"));
+			services.AddProducer<TaskDetailsDto>(Configuration.GetSection("Kafka"));
+			//      services.AddScoped(typeof(IMessageProducer<>), typeof(KafkaProducer<>));
+			services.AddApplication();
             services.AddPersistence(Configuration);
             services.AddControllers();
 
@@ -73,6 +76,8 @@ namespace Notes.WebApi
               var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
               config.IncludeXmlComments(xmlPath);
 			});
+
+
 		}
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

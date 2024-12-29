@@ -6,9 +6,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Tasker.Application.Tasks.Commands.SendTaskToKafka
+namespace Tasker.Application.Tasks.Commands.SendTaskToBroker
 {
-    public class SendTaskToKafkaCommand : IRequest
+    public class SendTaskToBrokerCommand : IRequest
     {
         public Guid Id { get; set; }
         public string Type { get; set; }

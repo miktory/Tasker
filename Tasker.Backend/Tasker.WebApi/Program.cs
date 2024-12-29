@@ -18,7 +18,7 @@ namespace Tasker.WebApi
                 var serviceProvider = scope.ServiceProvider;
                 try
                 {
-                    var context = serviceProvider.GetRequiredService<ParametrizedTasksDbContext>();
+                    var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex) 

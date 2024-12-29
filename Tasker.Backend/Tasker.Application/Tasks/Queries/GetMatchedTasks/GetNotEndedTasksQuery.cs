@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Tasker.Domain;
 using Tasker.Shared.Vm;
 
-namespace Tasker.Application.Tasks.Queries.GetTaskList
+namespace Tasker.Application.Tasks.Queries.GetNotEndedTasks
 {
-    public class GetTaskListQuery : IRequest<TaskListVm>
-    {
-        public Guid UserId { get; set; }
-    }
+	public class GetNotEndedTasksQuery: IRequest<List<ParametrizedTask>>
+	{
+	}
 }

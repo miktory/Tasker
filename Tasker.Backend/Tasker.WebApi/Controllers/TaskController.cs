@@ -4,12 +4,15 @@ using Microsoft.AspNetCore.SignalR;
 using Tasker.Application.Tasks.Queries.GetTaskList;
 using System.Threading.Tasks;
 using Tasker.Application.Tasks.Queries.GetTaskDetails;
-using Tasker.WebApi.Models;
+using Tasker.Shared.Dto;
 using AutoMapper;
 using Tasker.Application.Tasks.Commands.CreateTask;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
-using Tasker.Application.Tasks.Commands.SendTaskToKafka;
+using Tasker.Shared.Vm;
+using Tasker.Application.Tasks.Commands.SendTaskToBroker;
+using Tasker.Application.Tasks.Queries.GetNotEndedTasks;
+using System.Threading;
 
 namespace Tasker.WebApi.Controllers
 {
@@ -60,8 +63,9 @@ namespace Tasker.WebApi.Controllers
 				taskId = await Mediator.Send(command, cancellationTokenSource.Token);
 			}
 
+            var taskDetails = _mapper.Map<TaskDetailsDto>(createTaskDto);
+			var kafkaCommand = _mapper.Map<SendTaskToBrokerCommand>(taskDetails);
 
-			var kafkaCommand = _mapper.Map<SendTaskToKafkaCommand>(createTaskDto);
 			kafkaCommand.Id = taskId;
 
 			using (var cancellationTokenSource = new CancellationTokenSource(30000)) // отмена операции через 30 секунд

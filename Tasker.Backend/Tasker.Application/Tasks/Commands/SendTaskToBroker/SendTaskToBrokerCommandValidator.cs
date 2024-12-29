@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 
-namespace Tasker.Application.Tasks.Commands.SendTaskToKafka
+namespace Tasker.Application.Tasks.Commands.SendTaskToBroker
 {
-    public class SendTaskToKafkaCommandValidator : AbstractValidator<SendTaskToKafkaCommand>
+    public class SendTaskToBrokerCommandValidator : AbstractValidator<SendTaskToBrokerCommand>
     {
-        public SendTaskToKafkaCommandValidator() 
+        public SendTaskToBrokerCommandValidator() 
         {
             RuleFor(createTaskCommand => createTaskCommand.TTL).GreaterThanOrEqualTo(0);
             RuleFor(createTaskCommand => createTaskCommand.Id).NotEqual(Guid.Empty);

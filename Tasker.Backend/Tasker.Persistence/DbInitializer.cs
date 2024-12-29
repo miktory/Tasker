@@ -9,7 +9,7 @@ namespace Tasker.Persistence
 {
     public class DbInitializer
     {
-        public static void Initialize(ParametrizedTasksDbContext context)
+        public static void Initialize(ApplicationDbContext context)
         {
             context.Database.Migrate();
           

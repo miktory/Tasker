@@ -4,7 +4,7 @@ using Tasker.Application.Common.Mappings;
 using Tasker.Application.Tasks.Commands.CreateTask;
 using Tasker.Application.Tasks.Commands.SendTaskToKafka;
 
-namespace Tasker.WebApi.Models
+namespace Shared.Dto
 {
     public class CreateTaskDto : IMapWith<CreateTaskCommand>, IMapWith<SendTaskToKafkaCommand>
     {

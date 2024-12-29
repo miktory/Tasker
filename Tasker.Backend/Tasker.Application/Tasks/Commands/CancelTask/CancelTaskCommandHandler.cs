@@ -16,8 +16,8 @@ namespace Tasker.Application.Tasks.Commands.CancelTask
     public class CancelTaskCommandHandler
             : IRequestHandler<CancelTaskCommand>
     {
-        private readonly IParametrizedTasksDbContext _dbContext;
-        public CancelTaskCommandHandler(IParametrizedTasksDbContext dbContext) =>
+        private readonly IApplicationDbContext _dbContext;
+        public CancelTaskCommandHandler(IApplicationDbContext dbContext) =>
             _dbContext = dbContext;
         public async Task<Unit> Handle(CancelTaskCommand request,
             CancellationToken cancellationToken)

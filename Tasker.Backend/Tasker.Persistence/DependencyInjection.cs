@@ -16,11 +16,11 @@ namespace Tasker.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration) 
         {
             var connectionString = configuration["DbConnection"];
-            services.AddDbContext<ParametrizedTasksDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseNpgsql(connectionString);
             });
-            services.AddScoped<IParametrizedTasksDbContext>(provider => provider.GetService<ParametrizedTasksDbContext>());
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             return services;
         }
     }

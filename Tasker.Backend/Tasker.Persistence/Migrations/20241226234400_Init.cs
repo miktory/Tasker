@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -24,11 +25,26 @@ namespace Tasker.Persistence.Migrations
                     StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     TTL = table.Column<int>(type: "integer", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: false)
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    WorkerName = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ParametrizedTasks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ParametrizedTasksResults",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ParametrizedTaskId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Result = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParametrizedTasksResults", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
@@ -43,6 +59,9 @@ namespace Tasker.Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ParametrizedTasks");
+
+            migrationBuilder.DropTable(
+                name: "ParametrizedTasksResults");
         }
     }
 }
