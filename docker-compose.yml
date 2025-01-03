@@ -5,9 +5,8 @@ services:
       context: ./Tasker.Worker 
       dockerfile: Dockerfile
     ports:
-      - "7139:7139"
-    # depends_on:
-    #   - postgres
+      - "5166:8080"
+      - "7139:8081"
     restart: always
 
   tasker-backend:  
@@ -15,9 +14,8 @@ services:
       context: ./Tasker.Backend 
       dockerfile: Dockerfile
     ports:
-      - "7138:7138"  
-    # depends_on:
-    #   - postgres
+      - "5165:8080"  
+      - "7138:8081"
     restart: always
 
   tasker-identity:  
@@ -25,34 +23,6 @@ services:
       context: ./Tasker.Identity 
       dockerfile: Dockerfile
     ports:
-      - "7163:7163"  
-      - "7164:7164"
-    # depends_on:
-    #   - postgres
+      - "5154:8080"  
+      - "7163:8081"
     restart: always
-
-#   postgres:
-#     container_name: postgres
-#     image: postgres
-#     environment:
-#       PG_DATA: /var/lib/postgresql/data
-#       POSTGRES_USER: postgres
-#       POSTGRES_PASSWORD: postgres
-#     ports:
-#       - 5432:5432
-#     volumes:
-#       - ./pgdata:/var/lib/postgresql/data
-#     restart: always
-
-#   pgadmin:
-#     image: dpage/pgadmin4
-#     environment:
-#       PGADMIN_DEFAULT_EMAIL: admin@admin.com
-#       PGADMIN_DEFAULT_PASSWORD: admin
-#     ports:
-#       - "5050:80"
-#     depends_on:
-#       - postgres
-
-# volumes:
-#  pgdata:

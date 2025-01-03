@@ -3,8 +3,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 7163
-EXPOSE 7164
+EXPOSE 8080
+EXPOSE 8081
 
 RUN mkdir -p /app/Styles
 
