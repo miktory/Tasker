@@ -16,4 +16,11 @@ namespace Tasker.Domain
         public string Status { get; set; }
 		public string? WorkerName { get; set; }
 	}
+
+	public class ParametrizedTaskResult
+	{
+		public int Id { get; set; }
+		public Guid ParametrizedTaskId { get; set; }
+		public string? Result { get; set; }
+	}
 }

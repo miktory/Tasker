@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tasker.Application.Interfaces;
 
 namespace Tasker.Messaging.Kafka
 {
-	public class KafkaProducer<TMessage> : IKafkaProducer<TMessage>
+	public class KafkaProducer<TMessage> : IMessageProducer<TMessage>
 	{
 		private readonly IProducer<string, TMessage> producer;
 		private readonly string topic;
@@ -17,14 +18,14 @@ namespace Tasker.Messaging.Kafka
 		{
 			var config = new ProducerConfig
 			{
-				BootstrapServers = kafkaSettings.Value.BootstrapServers,
+				BootstrapServers = kafkaSettings.Value.Producer.BootstrapServers,
 			};
 
 			producer = new ProducerBuilder<string, TMessage>(config)
 				.SetValueSerializer(new KafkaJsonSerializer<TMessage>())
 				.Build();
 
-			topic = kafkaSettings.Value.Topic;
+			topic = kafkaSettings.Value.Producer.Topic;
 
 		}
 		public void Dispose()
@@ -36,7 +37,7 @@ namespace Tasker.Messaging.Kafka
 		{
 			await producer.ProduceAsync(topic, new Message<string, TMessage>
 			{
-				Key = "tasker-web-api",
+			//	Key = "tasker-web-api",
 				Value = message
 			}, cancellationToken);
 		}

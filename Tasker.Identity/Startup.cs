@@ -43,9 +43,11 @@ namespace Tasker.Identity
                 .AddAspNetIdentity<AppUser>()
                 .AddInMemoryApiResources(Configuration.ApiResources)
                 .AddInMemoryIdentityResources(Configuration.IdentityResources)
-                .AddInMemoryApiScopes(Configuration.ApiScopes)
+
+				.AddInMemoryApiScopes(Configuration.ApiScopes)
                 .AddInMemoryClients(Configuration.Clients)
-                .AddDeveloperSigningCredential();
+								.AddProfileService<CustomProfileService>()
+				.AddDeveloperSigningCredential();
 
             services.ConfigureApplicationCookie(config =>
             {

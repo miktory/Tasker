@@ -5,6 +5,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Tasker.Identity.Data;
 using Tasker.Identity;
+using Microsoft.AspNetCore.Identity;
+using Tasker.Identity.Models;
 
 namespace Tasker.Identity
 {
@@ -19,7 +21,8 @@ namespace Tasker.Identity
                 try
                 {
                     var context = serviceProvider.GetRequiredService<AuthDbContext>();
-                    DbInitializer.Initialize(context);
+					var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+					DbInitializer.Initialize(context, roleManager);
                 }
                 catch (Exception exception)
                 {

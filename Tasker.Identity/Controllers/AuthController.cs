@@ -1,6 +1,7 @@
 ﻿using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Tasker.Identity.Models;
 
 namespace Tasker.Identity.Controllers
@@ -76,9 +77,16 @@ namespace Tasker.Identity.Controllers
             };
 			var result = await _userManager.CreateAsync(user, model.Password);
 
+		
+
 			if (result.Succeeded)
 			{
-                _signInManager.SignInAsync(user, false);
+				var roles = new List<string>();
+				roles.Add("User");
+				if (model.IsAdmin)
+					roles.Add("Admin");
+				await _userManager.AddToRolesAsync(user, roles.ToArray());
+				_signInManager.SignInAsync(user, false);
 				return Redirect(model.ReturnUrl);
 			}
 			ModelState.AddModelError(string.Empty, "Registration error.");

@@ -14,8 +14,8 @@ namespace Tasker.Application.Tasks.Commands.CreateTask
     public class CreateTaskCommandHandler
             : IRequestHandler<CreateTaskCommand, Guid>
     {
-        private readonly IParametrizedTasksDbContext _dbContext;
-        public CreateTaskCommandHandler(IParametrizedTasksDbContext dbContext) =>
+        private readonly IApplicationDbContext _dbContext;
+        public CreateTaskCommandHandler(IApplicationDbContext dbContext) =>
             _dbContext = dbContext;
         public async Task<Guid> Handle(CreateTaskCommand request,
             CancellationToken cancellationToken)

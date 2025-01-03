@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tasker.Application\Tasker.Application.csproj" />
+    <ProjectReference Include="..\Tasker.Domain\Tasker.Domain.csproj" />
+    <ProjectReference Include="..\Tasker.Persistence\Tasker.Persistence.csproj" />
+    <ProjectReference Include="..\Tasker.WebApi\Tasker.WebApi.csproj" />
+  </ItemGroup>
+
+</Project>

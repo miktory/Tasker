@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 using Tasker.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
+using Tasker.Shared.Vm;
+using Tasker.Shared.Dto;
 
 namespace Tasker.Application.Tasks.Queries.GetTaskList
 {
     public class GetTaskListQueryHandler : IRequestHandler<GetTaskListQuery, TaskListVm>
     {
-        private readonly IParametrizedTasksDbContext _dbContext;
+        private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetTaskListQueryHandler(IParametrizedTasksDbContext dbContext, IMapper mapper)
+        public GetTaskListQueryHandler(IApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

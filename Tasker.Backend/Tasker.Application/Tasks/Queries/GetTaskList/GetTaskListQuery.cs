@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tasker.Domain;
+using Tasker.Shared.Vm;
 
 namespace Tasker.Application.Tasks.Queries.GetTaskList
 {
