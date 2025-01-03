@@ -44,7 +44,11 @@ namespace Tasker.WebApi.Middleware
                     code = HttpStatusCode.NotFound;
                     break;
 
-                case TimeoutException:
+				case AlreadyRequestedException alreadyRequestedException:
+					code = HttpStatusCode.Conflict;
+					break;
+
+				case TimeoutException:
                     code =HttpStatusCode.GatewayTimeout;
                     break;
 

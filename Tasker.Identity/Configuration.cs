@@ -1,6 +1,7 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 using IdentityModel;
+using System.Security.Claims;
 
 namespace Tasker.Identity
 {
@@ -12,8 +13,10 @@ namespace Tasker.Identity
         public static IEnumerable<IdentityResource> IdentityResources => new List<IdentityResource>
         {
             new IdentityResources.OpenId(),
-            new IdentityResources.Profile()
-        };
+            new IdentityResources.Profile(),
+
+			new IdentityResource("roles", "roles", new List<string> { ClaimTypes.Role })
+		};
 
         public static IEnumerable<ApiResource> ApiResources => new List<ApiResource>
         {
@@ -25,35 +28,9 @@ namespace Tasker.Identity
 
         public static IEnumerable<Client> Clients => new List<Client>
         {
-            new Client
-            {
-                ClientId = "tasker-web-api",
-                AllowedGrantTypes = GrantTypes.Code,
-                RequireClientSecret = false,
-                RequirePkce = true,
-                RedirectUris =
-                {
-				   "http://localhost:7138"
-				},
-                AllowedCorsOrigins =
-                {
-					"http://localhost:7138"
-				},
-                PostLogoutRedirectUris =
-                {
-					 "http://localhost:7138"
-				},
-                AllowedScopes =
-                {
-                    IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile,
-                    "TaskerWebAPI"
-                },
-                AllowAccessTokensViaBrowser = true
-            },
-			 new Client
+			new Client
    {
-	   ClientId = "test",
+	   ClientId = "tasker-backend",
 	   AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
 	   RequireClientSecret = false,
 	   RequirePkce = false,
@@ -73,7 +50,35 @@ namespace Tasker.Identity
 	   {
 		   IdentityServerConstants.StandardScopes.OpenId,
 		   IdentityServerConstants.StandardScopes.Profile,
-		   "TaskerWebAPI"
+		   "TaskerWebAPI",
+		   "roles"
+	   },
+	   AllowAccessTokensViaBrowser = true
+   },
+			 new Client
+   {
+	   ClientId = "tasker-worker",
+	   AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+	   RequireClientSecret = false,
+	   RequirePkce = false,
+			  RedirectUris =
+				{
+				   "http://localhost:7138"
+				},
+				AllowedCorsOrigins =
+				{
+					"http://localhost:7138"
+				},
+				PostLogoutRedirectUris =
+				{
+					 "http://localhost:7138"
+				},
+	   AllowedScopes =
+	   {
+		   IdentityServerConstants.StandardScopes.OpenId,
+		   IdentityServerConstants.StandardScopes.Profile,
+		   "TaskerWebAPI",
+           "roles"
 	   },
 	   AllowAccessTokensViaBrowser = true
    }

@@ -11,8 +11,10 @@ using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
 using Tasker.Shared.Vm;
 using Tasker.Application.Tasks.Commands.SendTaskToBroker;
-using Tasker.Application.Tasks.Queries.GetNotEndedTasks;
+using Tasker.Application.Tasks.Queries.GetWaitingTasks;
 using System.Threading;
+using Tasker.Application.Tasks.Commands.TurnTaskIntoProgress;
+using Tasker.Application.Tasks.Queries.GetTaskResult;
 
 namespace Tasker.WebApi.Controllers
 {
@@ -75,5 +77,30 @@ namespace Tasker.WebApi.Controllers
 
 			return Ok(taskId);  
         }
-  }
+
+        [Authorize(Roles = "Admin")]
+		[HttpPatch("request/{id}")]
+		public async Task<ActionResult<string>> RequestTaskProcessing(Guid id, string workerName)
+		{
+            var cmd = new TurnTaskIntoProgressCommand { TaskId = id, WorkerName = workerName };
+            var result = "";
+			using (var cancellationTokenSource = new CancellationTokenSource(30000)) // отмена операции через 30 секунд
+			{
+                result = await Mediator.Send(cmd);
+			}
+			return Ok(result);
+		}
+
+		[HttpGet("{id}/result")]
+		public async Task<ActionResult<TaskResultVm>> GetResult(Guid id)
+		{
+			var cmd = new GetTaskResultQuery { TaskId = id, UserId = UserId };
+            var result = new TaskResultVm();
+			using (var cancellationTokenSource = new CancellationTokenSource(30000)) // отмена операции через 30 секунд
+			{
+				result = await Mediator.Send(cmd);
+			}
+			return Ok(result);
+		}
+	}
 }

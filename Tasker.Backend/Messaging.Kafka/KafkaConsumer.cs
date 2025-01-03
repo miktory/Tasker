@@ -1,4 +1,5 @@
-﻿using Confluent.Kafka;
+﻿using AutoMapper.Configuration.Annotations;
+using Confluent.Kafka;
 using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -23,7 +24,9 @@ namespace Tasker.Messaging.Kafka
 			var config = new ConsumerConfig()
 			{
 				BootstrapServers = kafkaSettings.Value.Consumer.BootstrapServers,
-				GroupId = kafkaSettings.Value.Consumer.GroupId
+				GroupId = kafkaSettings.Value.Consumer.GroupId,
+				EnableAutoCommit = true,
+				AutoOffsetReset = AutoOffsetReset.Latest
 			};
 			_topic = kafkaSettings.Value.Consumer.Topic;
 			_consumer = new ConsumerBuilder<string, TMessage>(config)
@@ -45,13 +48,21 @@ namespace Tasker.Messaging.Kafka
 				{
 					var result = _consumer.Consume(stoppingToken);
 					var x = result.Value;
-					await _messageHandler.HandleAsync(result.Message.Value, stoppingToken);
+					using (CancellationTokenSource cts = new CancellationTokenSource(10000))
+					{
+						await _messageHandler.HandleAsync(result.Message.Value, cts.Token);
+					}
+					try
+					{
+						//_consumer.Commit();
+					}
+					catch (Exception ex) { }
 				}
 
 			}
-			catch
+			catch (Exception ex) 
 			{
-
+				Console.WriteLine(ex.Message);
 			}
 		}
 

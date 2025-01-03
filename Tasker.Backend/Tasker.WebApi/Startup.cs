@@ -16,7 +16,7 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Tasker.WebApi;
 using Tasker.Messaging.Kafka;
-using Tasker.Application.Tasks.Messages.TaskInfoUpdated;
+using Tasker.Application.Tasks.Messages.TaskResultReceived;
 using Tasker.Shared.Dto;
 
 
@@ -37,12 +37,13 @@ namespace Notes.WebApi
                 config.AddMaps(Assembly.GetExecutingAssembly());
             });
 
-            //	services.AddAutoMapper(Assembly.GetExecutingAssembly());
+			//	services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-			services.AddConsumer<TaskInfoUpdatedMessage, TaskInfoUpdatedMessageHandler>(Configuration.GetSection("Kafka"));
+			services.AddApplication(Configuration.GetSection("ServicesSettings"));
+			services.AddConsumer<TaskResultReceivedMessage, TaskResultReceivedMessageHandler>(Configuration.GetSection("Kafka"));
 			services.AddProducer<TaskDetailsDto>(Configuration.GetSection("Kafka"));
 			//      services.AddScoped(typeof(IMessageProducer<>), typeof(KafkaProducer<>));
-			services.AddApplication();
+
             services.AddPersistence(Configuration);
             services.AddControllers();
 
@@ -56,19 +57,30 @@ namespace Notes.WebApi
                 });
             });
 
-            services.AddAuthentication(config =>
+
+			var jwtSettings = Configuration.GetSection("JwtSettings");
+			// Настройка аутентификации JWT
+			services.AddAuthentication(config =>
             {
                 config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-                .AddJwtBearer("Bearer", options =>
-                {
-                    options.Authority = "https://localhost:7163";
-                    options.Audience = "TaskerWebAPI";
-                    options.RequireHttpsMetadata = false;
-				});
 
-			services.AddTransient<IConfigureOptions<SwaggerGenOptions>,
+
+                 //            .AddJwtBearer("Bearer", options =>
+                 //            {
+                 //                options.Authority = "https://localhost:7163";
+                 //                options.Audience = "TaskerWebAPI";
+                 //                options.RequireHttpsMetadata = false;
+                 //});
+                 .AddJwtBearer(options =>
+                 {
+                     options.Authority = jwtSettings["Authority"];
+                     options.Audience = jwtSettings["Audience"];
+                     options.RequireHttpsMetadata = bool.Parse(jwtSettings["RequireHttpsMetadata"]);
+                 });
+
+					 services.AddTransient<IConfigureOptions<SwaggerGenOptions>,
 				   ConfigureSwaggerOptions>();
 
 			services.AddSwaggerGen(config => {

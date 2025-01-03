@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4D067DBE-7F58-46E1-9A26-084517BC5B98}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9FF3DD3A-3FC2-4B44-AD7B-0304AE902727}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F45085EA-7CA6-4A0B-AE87-EDF5A082BB26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F433AD3A-4874-45C2-86C2-59BEF731D5CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker.Domain", "Tasker.Domain\Worker.Domain.csproj", "{F0E41251-BB37-4920-83CB-CFDFEAF37188}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasker.Application", "Tasker.Application\Tasker.Application.csproj", "{5D21BEE2-2A15-421B-B3DA-E880C55BCDEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasker.WebApi", "Tasker.WebApi\Tasker.WebApi.csproj", "{80708381-B38F-40AC-9C81-C61D1532FD4B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasker.Persistence", "Tasker.Persistence\Tasker.Persistence.csproj", "{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasker.Messaging.Kafka", "Messaging.Kafka\Tasker.Messaging.Kafka.csproj", "{44289BBA-C73E-4397-8B21-70CF81DE778A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasker.Shared", "Tasker.Shared\Tasker.Shared.csproj", "{926513E5-8DFE-4110-87EF-AC0E33C86898}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{FE1ED38E-06FA-4A37-BBFF-5B1ADBA9C179}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasker.APIClient", "Tasker.APIClient\Tasker.APIClient.csproj", "{32818914-FC2D-45B9-9C4A-C3CACE5A2FDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasker.Identity.APIClient", "Tasker.Identity.APIClient\Tasker.Identity.APIClient.csproj", "{A623F681-B3D5-47B1-8765-F2F88298BC5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0E41251-BB37-4920-83CB-CFDFEAF37188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E41251-BB37-4920-83CB-CFDFEAF37188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E41251-BB37-4920-83CB-CFDFEAF37188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E41251-BB37-4920-83CB-CFDFEAF37188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D21BEE2-2A15-421B-B3DA-E880C55BCDEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D21BEE2-2A15-421B-B3DA-E880C55BCDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D21BEE2-2A15-421B-B3DA-E880C55BCDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D21BEE2-2A15-421B-B3DA-E880C55BCDEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80708381-B38F-40AC-9C81-C61D1532FD4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80708381-B38F-40AC-9C81-C61D1532FD4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80708381-B38F-40AC-9C81-C61D1532FD4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80708381-B38F-40AC-9C81-C61D1532FD4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44289BBA-C73E-4397-8B21-70CF81DE778A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44289BBA-C73E-4397-8B21-70CF81DE778A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44289BBA-C73E-4397-8B21-70CF81DE778A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44289BBA-C73E-4397-8B21-70CF81DE778A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{926513E5-8DFE-4110-87EF-AC0E33C86898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{926513E5-8DFE-4110-87EF-AC0E33C86898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{926513E5-8DFE-4110-87EF-AC0E33C86898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{926513E5-8DFE-4110-87EF-AC0E33C86898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32818914-FC2D-45B9-9C4A-C3CACE5A2FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32818914-FC2D-45B9-9C4A-C3CACE5A2FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32818914-FC2D-45B9-9C4A-C3CACE5A2FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32818914-FC2D-45B9-9C4A-C3CACE5A2FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A623F681-B3D5-47B1-8765-F2F88298BC5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A623F681-B3D5-47B1-8765-F2F88298BC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A623F681-B3D5-47B1-8765-F2F88298BC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A623F681-B3D5-47B1-8765-F2F88298BC5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F0E41251-BB37-4920-83CB-CFDFEAF37188} = {4D067DBE-7F58-46E1-9A26-084517BC5B98}
+		{5D21BEE2-2A15-421B-B3DA-E880C55BCDEB} = {4D067DBE-7F58-46E1-9A26-084517BC5B98}
+		{80708381-B38F-40AC-9C81-C61D1532FD4B} = {F45085EA-7CA6-4A0B-AE87-EDF5A082BB26}
+		{E9F3B271-466B-47AB-A8A9-E8EAAD9AABB2} = {9FF3DD3A-3FC2-4B44-AD7B-0304AE902727}
+		{44289BBA-C73E-4397-8B21-70CF81DE778A} = {9FF3DD3A-3FC2-4B44-AD7B-0304AE902727}
+		{926513E5-8DFE-4110-87EF-AC0E33C86898} = {FE1ED38E-06FA-4A37-BBFF-5B1ADBA9C179}
+		{32818914-FC2D-45B9-9C4A-C3CACE5A2FDF} = {9FF3DD3A-3FC2-4B44-AD7B-0304AE902727}
+		{A623F681-B3D5-47B1-8765-F2F88298BC5C} = {9FF3DD3A-3FC2-4B44-AD7B-0304AE902727}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A43ADEC-7A0E-4389-A5F7-BFDFC8FF6120}
+	EndGlobalSection
+EndGlobal

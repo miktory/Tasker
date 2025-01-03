@@ -37,7 +37,7 @@ namespace Tasker.Messaging.Kafka
 		{
 			await producer.ProduceAsync(topic, new Message<string, TMessage>
 			{
-				Key = "tasker-web-api",
+			//	Key = "tasker-web-api",
 				Value = message
 			}, cancellationToken);
 		}

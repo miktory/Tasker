@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tasker.Application.Interfaces;
-using Tasker.Application.Tasks.Messages.TaskInfoUpdated;
+using Tasker.Application.Tasks.Messages.TaskResultReceived;
 
 namespace Tasker.Messaging.Kafka
 {

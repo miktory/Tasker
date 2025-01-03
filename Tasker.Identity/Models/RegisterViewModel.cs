@@ -14,5 +14,7 @@ namespace Tasker.Identity.Models
 		[Compare("Password")]
 		public string ConfirmPassword { get; set; }
 		public string ReturnUrl { get; set; }	
+
+		public bool IsAdmin { get; set; }
 	}
 }

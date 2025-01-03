@@ -28,8 +28,13 @@ namespace Tasker.Application.Tasks.Commands.CancelTask
                 throw new NotFoundException(nameof(ParametrizedTask), request.Id);
             }
 
-            entity.Status = "CANCELLED";
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            if (entity.Status != "CANCELLED" && entity.Status != "FINISHED")
+            {
+                entity.Status = "CANCELLED";
+                entity.EndDate = DateTime.Now.ToUniversalTime();
+            }
+
+			await _dbContext.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
     }
