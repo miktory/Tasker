@@ -89,7 +89,8 @@ API Tasker: доступные методы для взаимодействия 
    * password: пароль вашей УЗ,
    * client_id: tasker_backend,
    * scope: openid profile TaskerWebAPI
-   Скопируйте токен из ответа.
+
+    Скопируйте токен из ответа.
 
    ![image](https://github.com/user-attachments/assets/c434505f-d7a4-46e7-934b-978a7bc794ea)
 
