@@ -3,8 +3,10 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 7163
+EXPOSE 7164
+
+RUN mkdir -p /app/Styles
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -12,6 +14,7 @@ WORKDIR /src
 COPY ["Tasker.Identity.csproj", "."]
 RUN dotnet restore "./././Tasker.Identity.csproj"
 COPY . .
+COPY ./Styles /app/Styles
 WORKDIR "/src/."
 RUN dotnet build "./Tasker.Identity.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
