@@ -87,7 +87,7 @@ API Tasker: доступные методы для взаимодействия 
    * grant_type: password,
    * username: логин вашей УЗ,
    * password: пароль вашей УЗ,
-   * client_id: tasker_backend,
+   * client_id: tasker-backend,
    * scope: openid profile TaskerWebAPI
 
     Скопируйте токен из ответа.
